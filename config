@@ -10,7 +10,10 @@
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod4
-exec nm-applet
+set $w1 1:Shell
+set $w2 2:Web
+set $w3 3:Email
+
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below. ISO 10646 = Unicode
@@ -88,15 +91,15 @@ bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
 # Worksapce names
-workspace "1:Shell" output LVDS1
-workspace "2:Web"	output LVDS1
-workspace "3:Email"	output LVDS1
+workspace "$w1" output LVDS1
+workspace "$w2"	output LVDS1
+workspace "$w3"	output LVDS1
 
 
 # switch to workspace
-bindsym $mod+1 workspace 1:Shell
-bindsym $mod+2 workspace 2:Web
-bindsym $mod+3 workspace 3:Email
+bindsym $mod+1 workspace $w1
+bindsym $mod+2 workspace $w2
+bindsym $mod+3 workspace $w3
 bindsym $mod+4 workspace 4
 bindsym $mod+5 workspace 5
 bindsym $mod+6 workspace 6
@@ -106,9 +109,9 @@ bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace 1:Shell
-bindsym $mod+Shift+2 move container to workspace 2:Web
-bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+1 move container to workspace $w1
+bindsym $mod+Shift+2 move container to workspace $w2
+bindsym $mod+Shift+3 move container to workspace $w3
 bindsym $mod+Shift+4 move container to workspace 4
 bindsym $mod+Shift+5 move container to workspace 5
 bindsym $mod+Shift+6 move container to workspace 6
@@ -150,9 +153,17 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+#exec on startup
+exec chromium
+exec thunderbird
+exec nm-applet
+
+#background picture
+exec feh --bg-scale ~/Bilder/nordlicht.jpg
+
 #start programs at defined workspaces
-assign [class="Chromium"] 2:Web
-assign [class="Thunderbird"] 3:Email
+assign [class="Chromium"] $w2
+assign [class="Thunderbird"] $w3
 
 
 # Start i3bar to display a workspace bar (plus the system information i3status
