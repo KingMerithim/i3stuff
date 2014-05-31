@@ -37,7 +37,28 @@ do
 	#date
 	DATE=$PRE"`date | cut -d " " -f 1-4`"$COL$NORMCOL$CER
 	WLAN=$PRE"`iwgetid -r`"$COL$NORMCOL$CER
-	echo "[$DATE,$WLAN,$BATERIA,$TIME]," || exit 1
+	#RAM
+	ram_usage=`ruby ~/.i3/ram.rb`
+	if [ "$ram_usage" = "" ]; then
+	ram_usage="no"
+	fi
+	check=${ram_usage%.*}
+	#check=51
+	if [ $check -ge 90 ]; then
+	#türkis
+	color="#33ffee"
+	else
+		if [ $check -ge 50 ]; then
+		#lightblue
+		color="#3399ee"
+		else
+		#blue
+		color="#0000ff"
+		fi
+	fi
+	RAM=$PRE"$ram_usage%"$COL$color$CER
+	
+	echo "[$DATE,$WLAN,$RAM,$BATERIA,$TIME]," || exit 1
 	sleep 5
 done
 
