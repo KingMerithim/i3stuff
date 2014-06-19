@@ -1,0 +1,42 @@
+#!/bin/sh
+IN="LVDS1"
+EXT="VGA1"
+
+lock() {
+    ~/.i3/i3lock -c 000000
+}
+
+case "$1" in
+	vga)
+		if (xrandr | grep "^$EXT connected [[:digit:]]"); then
+			xrandr --output $IN --auto --output $EXT --off 
+		else 
+			if (xrandr | grep "^$EXT connected"); then
+			xrandr --output $IN --auto --primary --output $EXT --auto --right-of $IN
+			fi
+		fi
+		;;
+    lock)
+        lock
+        ;;
+    logout)
+        i3-msg exit
+        ;;
+    suspend)
+        lock && systemctl suspend
+        ;;
+    hibernate)
+        lock && systemctl hibernate
+        ;;
+    reboot)
+        systemctl reboot
+        ;;
+    shutdown)
+        systemctl poweroff
+        ;;
+    *)
+        echo "Usage: $0 {lock|logout|suspend|hibernate|reboot|shutdown}"
+        exit 2
+esac
+
+exit 0

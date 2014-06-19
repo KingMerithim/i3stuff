@@ -9,10 +9,11 @@ echo '[],'
 PRE='{ "full_text": "'
 COL='", "color": "'
 CER='" }'
-NORMCOL='#ffffff'
+NORMCOL='#aaffff'
 
 while [ 1 -gt 0 ]
 do
+	
 	is_charged=`acpi -b | grep "remaining"`
 	output=""
 
@@ -45,8 +46,8 @@ do
 	check=${ram_usage%.*}
 	#check=51
 	if [ $check -ge 90 ]; then
-	#türkis
-	color="#33ffee"
+	#normcol
+	color=NORMCOL
 	else
 		if [ $check -ge 50 ]; then
 		#lightblue

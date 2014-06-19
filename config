@@ -159,7 +159,7 @@ exec thunderbird
 exec nm-applet
 
 #background picture
-exec feh --bg-scale ~/Bilder/nordlicht.jpg
+exec feh --bg-scale ~/.i3/background.jpg
 
 #start programs at defined workspaces
 assign [class="Chromium"] $w2
@@ -179,14 +179,15 @@ bar {
 
 # creating a prompt with mod+print to suspend/shutdown..
 
-set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+set $mode_system System (t) toggle VGA, (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
-    bindsym l exec --no-startup-id i3exit lock, mode "default"
-    bindsym e exec --no-startup-id i3exit logout, mode "default"
-    bindsym s exec --no-startup-id i3exit suspend, mode "default"
-    bindsym h exec --no-startup-id i3exit hibernate, mode "default"
-    bindsym r exec --no-startup-id i3exit reboot, mode "default"
-    bindsym Shift+s exec --no-startup-id i3exit shutdown, mode "default"  
+	bindsym t exec --no-startup-id ~/.i3/i3exit vga, mode "default"
+    bindsym l exec --no-startup-id ~/.i3/i3exit lock, mode "default"
+    bindsym e exec --no-startup-id ~/.i3/i3exit logout, mode "default"
+    bindsym s exec --no-startup-id ~/.i3/i3exit suspend, mode "default"
+    bindsym h exec --no-startup-id ~/.i3/i3exit hibernate, mode "default"
+    bindsym r exec --no-startup-id ~/.i3/i3exit reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id ./i3exit shutdown, mode "default"  
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
